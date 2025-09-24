@@ -1,0 +1,14 @@
+package se.iths.jimmy;
+
+public class Plants extends Product {
+
+    public Plants(String articleNumber, String title, double price, String description) {
+        super(articleNumber, title, price, description);
+    }
+
+    @Override
+    public String category() {
+        return "Plant";
+    }
+
+}
