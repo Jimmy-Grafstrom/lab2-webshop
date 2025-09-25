@@ -5,9 +5,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Webshop webshop = new Webshop();
+        Ui ui = new UiScanner(scanner);
+        Webshop webshop = new Webshop(ui);
 
-        webshop.webshopCompose(scanner);
+        webshop.webshopCompose();
 
     }
 }

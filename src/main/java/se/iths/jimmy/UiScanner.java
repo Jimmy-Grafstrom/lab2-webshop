@@ -12,6 +12,7 @@ public class UiScanner implements Ui{
 
     @Override
     public String prompt(String message) {
+        System.out.println(message);
         return scanner.nextLine();
     }
 
