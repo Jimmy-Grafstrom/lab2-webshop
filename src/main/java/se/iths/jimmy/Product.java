@@ -3,13 +3,14 @@ package se.iths.jimmy;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import java.lang.reflect.Type;
-
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT, property = "type")
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Furniture.class, name = "furniture"),
-        @JsonSubTypes.Type(value = Lamps.class, name = "lamps"),
-        @JsonSubTypes.Type(value = Plants.class, name = "plants")
+        @JsonSubTypes.Type(value = Lamps.class, name = "lamp"),
+        @JsonSubTypes.Type(value = Plants.class, name = "plant")
 })
 public abstract class Product {
     private String articleNumber;
