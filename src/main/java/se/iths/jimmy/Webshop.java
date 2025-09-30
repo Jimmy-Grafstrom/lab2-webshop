@@ -1,15 +1,18 @@
 package se.iths.jimmy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Webshop {
 
-    private static final String FILE_PATH = "products.json";
+    private String FILE_PATH = "products.json";
     private List<Product> productList;
     private List<Product> cart;
     private Ui ui;
@@ -40,10 +43,19 @@ public class Webshop {
         ui.info("Catalogue successfully setup.");
     }
 
+/*    public void initialProductSetup() {
+        productList = new ArrayList<>();
+        Product productTest = new Furniture("1234", "table", 888, "a table");
+        productList.add(productTest);
+
+        ui.info("Catalogue successfully setup.");
+    }*/
+
     public void loadProducts() {
         File file = new File(FILE_PATH);
         if (file.exists() && file.length() > 0) {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.enable(SerializationFeature.INDENT_OUTPUT);
             try {
                 List<Product> loadedList = mapper.readValue(file, mapper.getTypeFactory().constructCollectionType(List.class, Product.class));
                 this.productList = loadedList;
@@ -60,11 +72,38 @@ public class Webshop {
 
     public void saveProducts() {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(FILE_PATH), productList);
-        } catch (Exception e) {
-            ui.info("Something went wrong with saving products to file: " + FILE_PATH + " (" + e.getMessage() + ")");
+            // Steg 1: Skapa en lista för att hålla våra individuella JSON-strängar.
+            List<String> individualJsonStrings = new ArrayList<>();
+
+            // Steg 2 & 3: Loopa igenom produktlistan och konvertera varje objekt till en sträng.
+            for (Product product : this.productList) {
+                // Konvertera ETT produktobjekt till en JSON-sträng i minnet.
+                String productAsJsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(product);
+
+                // Steg 4: Lägg till strängen i vår lista.
+                individualJsonStrings.add(productAsJsonString);
+            }
+
+            // Steg 5: Slå ihop alla strängar med ett kommatecken mellan varje.
+            String allProductsString = String.join(",\n", individualJsonStrings);
+
+            // Steg 6: Vira in allt i klamrar för att skapa en giltig JSON-array.
+            String finalJsonArrayString = "[\n" + allProductsString + "\n]";
+
+            // Steg 7: Spara den slutgiltiga strängen till filen.
+            // Vi använder en FileWriter här eftersom vi redan har en färdig sträng.
+            try (FileWriter writer = new FileWriter(FILE_PATH)) {
+                writer.write(finalJsonArrayString);
+            }
+
+            ui.info("Products successfully saved to: " + FILE_PATH);
+
+        } catch (IOException e) { // Vi behöver fånga IOException specifikt
+            ui.info("Something went wrong when saving products to file: " + FILE_PATH + " (" + e.getMessage() + ")");
         }
+
     }
 
     public void webshopCompose() {
