@@ -1,4 +1,4 @@
-package se.iths.jimmy;
+package se.iths.jimmy.ui;
 
 public interface Ui {
     public String prompt(String message);

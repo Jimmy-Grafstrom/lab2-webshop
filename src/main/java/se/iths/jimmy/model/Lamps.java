@@ -1,4 +1,4 @@
-package se.iths.jimmy;
+package se.iths.jimmy.model;
 
 public class Lamps extends Product {
 

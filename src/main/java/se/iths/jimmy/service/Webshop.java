@@ -1,7 +1,12 @@
-package se.iths.jimmy;
+package se.iths.jimmy.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import se.iths.jimmy.model.Furniture;
+import se.iths.jimmy.model.Lamps;
+import se.iths.jimmy.model.Plants;
+import se.iths.jimmy.model.Product;
+import se.iths.jimmy.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +17,7 @@ import java.util.List;
 
 public class Webshop {
 
-    private String FILE_PATH = "products.json";
+    private String FILE_PATH = "src/main/resources/products.json";
     private List<Product> productList;
     private List<Product> cart;
     private Ui ui;
@@ -42,14 +47,6 @@ public class Webshop {
                 – wherever you choose to place them."""));
         ui.info("Catalogue successfully setup.");
     }
-
-/*    public void initialProductSetup() {
-        productList = new ArrayList<>();
-        Product productTest = new Furniture("1234", "table", 888, "a table");
-        productList.add(productTest);
-
-        ui.info("Catalogue successfully setup.");
-    }*/
 
     public void loadProducts() {
         File file = new File(FILE_PATH);

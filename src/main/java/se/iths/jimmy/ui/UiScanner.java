@@ -1,8 +1,8 @@
-package se.iths.jimmy;
+package se.iths.jimmy.ui;
 
 import java.util.Scanner;
 
-public class UiScanner implements Ui{
+public class UiScanner implements Ui {
     private final Scanner scanner;
 
     public UiScanner(Scanner scanner) {

@@ -1,4 +1,4 @@
-package se.iths.jimmy;
+package se.iths.jimmy.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
