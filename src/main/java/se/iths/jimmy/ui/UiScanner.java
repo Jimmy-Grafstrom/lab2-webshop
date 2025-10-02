@@ -3,7 +3,11 @@ package se.iths.jimmy.ui;
 import java.util.Scanner;
 
 public class UiScanner implements Ui {
-    private final Scanner scanner;
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static Scanner getScanner() {
+        return scanner;
+    }
 
     public UiScanner(Scanner scanner) {
         this.scanner = scanner;
