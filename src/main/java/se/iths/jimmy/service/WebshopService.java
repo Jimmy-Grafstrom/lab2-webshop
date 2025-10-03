@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Webshop {
+public class WebshopService {
 
-    //private JsonService jsonService;
     private RepositoryService repositoryService;
     private List<Product> cart;
     private Ui ui;
 
-    public Webshop(Ui ui, RepositoryService repositoryService) {
+    public WebshopService(Ui ui, RepositoryService repositoryService) {
         this.repositoryService = repositoryService;
         cart = new ArrayList<>();
         this.ui = ui;

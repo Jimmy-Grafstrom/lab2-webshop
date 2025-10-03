@@ -1,7 +1,7 @@
 package se.iths.jimmy;
 
 import se.iths.jimmy.service.RepositoryService;
-import se.iths.jimmy.service.Webshop;
+import se.iths.jimmy.service.WebshopService;
 import se.iths.jimmy.ui.Ui;
 import se.iths.jimmy.ui.UiScanner;
 
@@ -12,9 +12,9 @@ public class Main {
         Scanner scanner = UiScanner.getScanner();
         Ui ui = new UiScanner(scanner);
         RepositoryService repositoryService = new RepositoryService(ui);
-        Webshop webshop = new Webshop(ui, repositoryService);
+        WebshopService webshopService = new WebshopService(ui, repositoryService);
 
-        webshop.webshopCompose();
+        webshopService.webshopCompose();
 
     }
 }
