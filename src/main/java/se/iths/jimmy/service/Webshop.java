@@ -1,31 +1,24 @@
 package se.iths.jimmy.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import se.iths.jimmy.model.Furniture;
-import se.iths.jimmy.model.Lamps;
-import se.iths.jimmy.model.Plants;
 import se.iths.jimmy.model.Product;
 import se.iths.jimmy.ui.Ui;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Webshop {
 
-    private JsonService jsonService;
+    //private JsonService jsonService;
+    private RepositoryService repositoryService;
     private List<Product> cart;
     private Ui ui;
 
-    public Webshop(Ui ui, JsonService jsonService) {
-        this.jsonService = jsonService;
+    public Webshop(Ui ui, RepositoryService repositoryService) {
+        this.repositoryService = repositoryService;
         cart = new ArrayList<>();
         this.ui = ui;
-        jsonService.loadProducts();
+        repositoryService.createRepository();
     }
 
     public void webshopCompose() {
@@ -45,7 +38,7 @@ public class Webshop {
                 case "5" -> listAvailableProducts();
 
                 case "q" -> {
-                    jsonService.saveProducts();
+                    //repositoryService.saveToJson();
                     ui.info("Quitting...");
                     ui.info("Please come again!");
                     running = false;
@@ -57,7 +50,7 @@ public class Webshop {
 
     private void webshopAdd() {
         String productName = ui.prompt("Enter the 'title' or 'article number' of the product to add: ");
-        for (Product productNameMatch : jsonService.getProductList()) {
+        for (Product productNameMatch : repositoryService.getProductList()) {
             if (productNameMatch.getTitle().equalsIgnoreCase(productName) || productNameMatch.getArticleNumber().equalsIgnoreCase(productName)) {
                 addProduct(productNameMatch);
                 ui.info(productNameMatch.getTitle() + " has been added!");
@@ -69,7 +62,7 @@ public class Webshop {
 
     private void webshopRemove() {
         String productName = ui.prompt("Enter the 'title' or 'article number' of the product to remove: ");
-        for (Product productNameMatch : jsonService.getProductList()) {
+        for (Product productNameMatch : repositoryService.getProductList()) {
             if (productNameMatch.getTitle().equalsIgnoreCase(productName) || productNameMatch.getArticleNumber().equalsIgnoreCase(productName)) {
                 removeProduct(productNameMatch);
                 ui.info(productNameMatch.getTitle() + " has been removed!");
@@ -81,7 +74,7 @@ public class Webshop {
 
     private void webshopPrintInfo() {
         String productName = ui.prompt("Enter the 'title' or 'article number' of the product for more information: ");
-        for (Product productNameMatch : jsonService.getProductList()) {
+        for (Product productNameMatch : repositoryService.getProductList()) {
             if (productNameMatch.getTitle().equalsIgnoreCase(productName) || productNameMatch.getArticleNumber().equalsIgnoreCase(productName)) {
                 printProductInfo(productNameMatch);
                 return;
@@ -116,7 +109,7 @@ public class Webshop {
 
     private void listAvailableProducts() {
         ui.info("Available products: ");
-        for (Product product : jsonService.getProductList()) {
+        for (Product product : repositoryService.getProductList()) {
             ui.info(product.getTitle() + " : " + product.getArticleNumber());
         }
     }
