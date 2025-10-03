@@ -1,7 +1,9 @@
 # Lab 2 Webshop
 
-En applikation som först laddar in objekt i en arraylist som sen vid avslut sparas till JSON-fil.  
-Efter JSON-filen är genererad för första gången så läser programmet direkt från JSON-filen istället för att skapa en ny.
+En applikation som först laddar in objekt i en arraylist som sparas till JSON-fil.
+
+Efter JSON-filen är genererad för första gången så läser programmet direkt från JSON-filen istället för att skapa en ny
+JSON nästa gång programmet körs.
 
 Användaren får upp valmöjligheter i en meny.
 
@@ -16,7 +18,8 @@ Användaren får upp valmöjligheter i en meny.
 
 ### Struktur:
 
-* Webshop.java styr den interna logiken i appen.
+* WebshopService.java styr den övergripande logiken i appen.
+* RepositoryService.java sköter hur programmet läser och sparar till och från JSON-fil.
 * Product är en abstrakt klass som har 3 subklasser. Dessa är Furniture, Lamps och Plants.  
   Dessa tillsammans går under Model-paketet och deras ansvar är att skapa objekt.
 * I paketet ui så har ui:n separerats från logiken. Det medför att flera olika ui kan möjligen implementeras.  

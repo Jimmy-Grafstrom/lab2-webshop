@@ -37,7 +37,6 @@ public class WebshopService {
                 case "5" -> listAvailableProducts();
 
                 case "q" -> {
-                    //repositoryService.saveToJson();
                     ui.info("Quitting...");
                     ui.info("Please come again!");
                     running = false;
