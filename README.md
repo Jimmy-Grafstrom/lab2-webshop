@@ -23,7 +23,7 @@ Användaren får upp valmöjligheter i en meny.
 * Product är en abstrakt klass som har 3 subklasser. Dessa är Furniture, Lamps och Plants.  
   Dessa tillsammans går under Model-paketet och deras ansvar är att skapa objekt.
 * I paketet ui så har ui:n separerats från logiken. Det medför att flera olika ui kan möjligen implementeras.  
-  I nuläget finns bara scanner ui implementerat.
+  I nuläget finns ui för scanner och JOptionPane.
 * Main.java ansvarar för att köra igång applikationen.
 
 ```
@@ -44,8 +44,8 @@ lab2-webshop/
         │               │   └── Webshop.java
         │               └── ui/
         │                   ├── Ui.java
-        │                   └── UiScanner.java
-        └── resources/
+        │                   ├── UiScanner.java
+        └── resources/      └── UiJOptionPane.java
             ├── pom.xml
             └── products.json
 ```
