@@ -90,32 +90,35 @@ public class WebshopService {
     }
 
     private void listProductsInCart() {
+        StringBuilder stringBuilder = new StringBuilder();
         if (cart.isEmpty()) {
             ui.info("Your cart is empty, please add a product first.");
-            ui.info("");
         } else {
-            ui.info("Listing all added products from the cart: \n" +
-                    "----------------------------------------");
             for (Product product : cart) {
-                ui.info("Product name: " + product.getTitle());
-                ui.info("Article number: " + product.getArticleNumber());
-                ui.info("Price: " + product.getPrice() + " SEK");
-                ui.info("");
+                String concatenatedString = "Product name: " + product.getTitle() + "\n" +
+                        "Article number: " + product.getArticleNumber() + "\n" +
+                        "Price: " + product.getPrice() + " SEK" + "\n";
+                stringBuilder.append(concatenatedString);
             }
+            ui.info("Listing all added products from the cart: \n" +
+                    "----------------------------------------\n" +
+                    stringBuilder.toString());
         }
     }
 
     private void listAvailableProducts() {
-        ui.info("Available products: ");
+        StringBuilder combinedString = new StringBuilder();
         for (Product product : repositoryService.getProductList()) {
-            ui.info(product.getTitle() + " : " + product.getArticleNumber());
+            String concatenatedStr = product.getTitle() + " : " + product.getArticleNumber() + "\n";
+            combinedString.append(concatenatedStr);
         }
+        ui.info("Available products: \n" + combinedString.toString());
     }
 
     private void printProductInfo(Product product) {
-        ui.info("Product name: " + product.getTitle() + ", Article number: " + product.getArticleNumber());
-        ui.info("Category: " + product.category() + ".");
-        ui.info("Description: \n" + "'" + product.getDescription() + "'");
-        ui.info("");
+        String nameArticleNumber = "Product name: " + product.getTitle() + "\nArticle number: " + product.getArticleNumber() + "\n";
+        String category = "Category: " + product.category() + "\n";
+        String description = "Description: \n" + "'" + product.getDescription() + "'";
+        ui.info(nameArticleNumber + category + description);
     }
 }
